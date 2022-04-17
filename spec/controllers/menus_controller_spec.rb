@@ -16,14 +16,13 @@ RSpec.describe MenusController do
   end
 
   describe 'GET /menus/:id' do
-    it '[controller.menu.2] it should return menu with the certain id' do
+    it '[controller.menu.2] it should return a menu with the id' do
       menu = FactoryBot.create(:menu)
-
+      
       get :show, params: { id: menu }
-
-      parsed_body = JSON.parse(response.body)
-      expect(response).to be_successful
+      
       expect(assigns(:menu)).to eq menu
+      expect(response).to be_successful
     end
   end
 end
