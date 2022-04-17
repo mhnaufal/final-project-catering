@@ -37,3 +37,5 @@ pragma table_info('table name')
 ### Credits
 
 Thanks to [Generasi GIGIH 2.0](https://www.anakbangsabisa.org/generasi-gigih/) for providing me with a such wonderful journey
+
+Extra note = I use branch **develop** as the place where the history of commits exist
