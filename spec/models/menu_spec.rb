@@ -38,15 +38,7 @@ RSpec.describe Menu, type: :model do
         menu = FactoryBot.build(:menu, description: "Lorem ipsum dolor, sit amet consectetur 
           adipisicing elit. Odio, hic voluptatibus sequi eligendi atque excepturi maxime, incidunt 
           necessitatibus quam consequuntur nostrum nihil qui magnam numquam dolore repellat? Assumenda 
-          nobis deleniti error quia quas, eum quis labore unde cumque optio iure quam, minima aliquid 
-          suscipit corporis voluptas cupiditate in animi laborum, iusto tempore voluptatum sint consequatur? 
-          Alias quaerat beatae dolorem in commodi amet quo ex obcaecati adipisci? Qui ratione tempore 
-          perspiciatis voluptate ullam, reprehenderit deleniti pariatur totam culpa neque ipsam laudantium, 
-          enim, nihil est dolor minima minus! Quia at officiis nam tempore laborum laboriosam libero facere animi, 
-          eum ipsum distinctio, quas illo officia optio quisquam commodi consequatur sit est architecto modi.
-          Nam repellendus consequatur alias delectus, iste fuga reiciendis, libero quod ad quas eaque nobis. 
-          Unde, blanditiis? Et ut atque nostrum. Ipsum libero tempora voluptatum dolorem suscipit asperiores, 
-          magnam optio blanditiis ex dignissimos veritatis, ab, saepe non deserunt consequuntur itaque dicta.Z")
+          nobis deleniti error quia quas, eum quis labore unde cumque optio iure quam, minima aliquid")
         menu.valid?
         expect(menu.errors[:description]).to include("is too long (maximum is 150 characters)")
         expect(menu).to_not be_valid
