@@ -12,7 +12,7 @@ RSpec.describe MenusController do
       parsed_body = JSON.parse(response.body)
 
       expect(response).to be_successful
-      expect(parsed_body.size).to eq(3)
+      expect(parsed_body["payload"].size).to eq(3)
     end
   end
 
@@ -22,12 +22,13 @@ RSpec.describe MenusController do
 
       get :show, params: { id: menu }
 
-      expect(assigns(:menu)).to eq menu
+      expect(assigns(:menu)).to eq(menu)
       expect(response).to be_successful
     end
 
     it '[controller.menu.3] it should return an empty menu & 404 HTTP code because there is no menu with the given menu_id' do
       menu_id = 0
+
       get :show, params: { id: menu_id }
 
       parsed_body = JSON.parse(response.body)
