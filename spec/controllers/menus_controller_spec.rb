@@ -17,7 +17,7 @@ RSpec.describe MenusController do
   end
 
   describe 'GET /menus/:id' do
-    it '[controller.menu.2] it should return a menu with the id & 200 HTTP code' do
+    it '[controller.menu.2] it should return a menu with the given menu_id & 200 HTTP code' do
       menu = FactoryBot.create(:menu)
 
       get :show, params: { id: menu }
@@ -26,12 +26,13 @@ RSpec.describe MenusController do
       expect(response).to be_successful
     end
 
-    it '[controller.menu.3] it should return empty & 404 HTTP code because there is no menu with the id exist' do
-      get :show, params: { id: 0 }
+    it '[controller.menu.3] it should return an empty menu & 404 HTTP code because there is no menu with the given menu_id' do
+      menu_id = 0
+      get :show, params: { id: menu_id }
 
       parsed_body = JSON.parse(response.body)
 
-      expect(parsed_body).to include({ "message" => "No Menu with that id" })
+      expect(parsed_body).to include({ "message" => "No Menu with the id = #{menu_id}" })
       expect(response).to have_http_status(:not_found)
     end
   end

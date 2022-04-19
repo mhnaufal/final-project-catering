@@ -1,12 +1,13 @@
 class MenusController < ApplicationController
   def index
-    render json: Menu.all
+    @menus = Menu.all
+    render json: @menus
   end
 
   def show
     @menu = Menu.find_by_id(params[:id])
     if @menu.nil?
-      render json: { message: "No Menu with that id" }, status: :not_found
+      render json: { message: "No Menu with the id = #{params[:id]}" }, status: :not_found
     else
       render json: @menu
     end
