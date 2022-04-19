@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
+  root to: 'home#index'
+  resources :menus
+  resources :orders
+  patch '/orders/status/:id', to: 'orders#change_status'
 end
