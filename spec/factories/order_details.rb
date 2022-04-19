@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :order_detail do
-    order { nil }
-    menu { nil }
-    quantity { 1 }
-    menu_price { "9.99" }
+    order
+    menu
+    quantity { Faker::Number.number(digits: 1) }
+    menu_price { Faker::Number.decimal(l_digits: 3, r_digits: 2) }
   end
 end
