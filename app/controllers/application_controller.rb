@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     }
   end
 
-  def send_failed(message, payload)
+  def send_failed(message, payload = nil)
     {
       status: "FAILED",
       url: request.host,
