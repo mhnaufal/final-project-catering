@@ -28,7 +28,7 @@ RSpec.describe ReportsController do
       parsed_body = JSON.parse(response.body)
 
       expect(response).to_not be_successful
-      # expect(parsed_body["payload"]).to include("report")
+      expect(parsed_body["message"]).to include("Email format not valid")
     end
   end
 end
