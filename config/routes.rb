@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   resources :menus
   resources :orders
   patch '/orders/status/:id', to: 'orders#change_status'
+  get '/reports/today', to: 'reports#get_todays_report'
 end
