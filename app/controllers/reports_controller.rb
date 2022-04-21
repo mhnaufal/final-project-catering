@@ -7,7 +7,7 @@ class ReportsController < ApplicationController
       report: report
     }
 
-    render json: send_success("Get todays' report", payload)
+    return render json: send_success("Get todays' report", payload)
   end
 
   def get_report_by_email
@@ -44,7 +44,22 @@ class ReportsController < ApplicationController
     if report.nil?
       return render json: send_failed("No report found", nil), status: :not_found
     else
-      return render json: send_success("Get report by price", report)
+      return render json: send_success("Get report by price", payload)
+    end
+  end
+
+  def get_report_by_date
+    report = Order.where(created_at: params[:date])
+
+    payload = {
+      date: Time.current.to_date,
+      report: report
+    }
+
+    if report.nil?
+      return render json: send_failed("No report found", nil), status: :not_found
+    else
+      return render json: send_success("Get a report for the date", payload)
     end
   end
 
