@@ -39,5 +39,14 @@ RSpec.describe ReportsController do
       expect(response).to be_successful
       expect(parsed_body["message"]).to include("Get report by price")
     end
+
+    it '[controller.report.5] is invalid if the price incorrect form or nil' do
+      get :get_report_by_price, params: { total: "$100" }
+
+      parsed_body = JSON.parse(response.body)
+
+      expect(response).to_not be_successful
+      expect(parsed_body["message"]).to include("Total price format not valid")
+    end
   end
 end
