@@ -30,5 +30,14 @@ RSpec.describe ReportsController do
       expect(response).to_not be_successful
       expect(parsed_body["message"]).to include("Email format not valid")
     end
+
+    it '[controller.report.4] it should return report within less than or equal the given price' do
+      get :get_report_by_price, params: { total: 10000 }
+
+      parsed_body = JSON.parse(response.body)
+
+      expect(response).to be_successful
+      expect(parsed_body["message"]).to include("Get report by price")
+    end
   end
 end
