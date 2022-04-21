@@ -29,6 +29,12 @@ class ReportsController < ApplicationController
     end
   end
 
+  def get_report_by_price
+    report = Order.where("total <= ?", params[:total])
+
+    return render json: send_success("Get report by price", report)
+  end
+
   private
   def is_email_valid(email)
     email =~ /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
