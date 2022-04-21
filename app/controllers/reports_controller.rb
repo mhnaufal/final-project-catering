@@ -10,7 +10,7 @@ class ReportsController < ApplicationController
     render json: send_success("Get todays' report", payload)
   end
 
-  def get_todays_report_by_email
+  def get_report_by_email
     unless is_email_valid(params[:email])
       return render json: send_failed("Email format not valid", nil), status: :bad_request
     end

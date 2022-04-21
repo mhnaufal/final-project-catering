@@ -4,6 +4,6 @@ Rails.application.routes.draw do
   resources :orders
   patch '/orders/status/:id', to: 'orders#change_status'
   get '/reports/today', to: 'reports#get_todays_report'
-  get '/reports/customer/:email', to: 'reports#get_todays_report_by_email'
+  get '/reports/customer/:email', to: 'reports#get_report_by_email'
   get '/reports/price/:total', to: 'reports#get_report_by_price'
 end
