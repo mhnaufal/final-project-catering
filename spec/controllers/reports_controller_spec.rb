@@ -48,5 +48,14 @@ RSpec.describe ReportsController do
       expect(response).to_not be_successful
       expect(parsed_body["message"]).to include("Total price format not valid")
     end
+
+    it '[controller.report.6] it should return report based on the given date' do
+      get :get_report_by_date, params: { date: "2022/04/24" }
+
+      parsed_body = JSON.parse(response.body)
+
+      expect(response).to be_successful
+      expect(parsed_body["message"]).to include("Get a report for the date")
+    end
   end
 end
