@@ -1,12 +1,7 @@
 class MenusController < ApplicationController
   def index
     @menus = Menu.all
-    render json: {
-      status: 'SUCCESS',
-      url: request.host || '0.0.0.0',
-      message: 'All available menus',
-      payload: @menus
-    }
+    return render json: send_success("All available menus", @menus)
   end
 
   def show
@@ -15,13 +10,18 @@ class MenusController < ApplicationController
     if @menu.nil?
       render json: { message: "No Menu with the id = #{params[:id]}" }, status: :not_found
     else
-      render json: {
-        status: 'SUCCESS',
-        url: request.host || '0.0.0.0',
-        message: "Menu with id = #{params[:id]}",
-        payload: @menu
-      }
+      return render json: send_success("Menu with id = #{params[:id]}", @menu)
     end
   end
+
+  def create
+    menu = Menu.new(menu_params)
+    menu.save
+    return render json: send_success("Successfully create a Menu", menu)
+  end
   
+  private
+  def menu_params
+    params.permit(:name, :description, :price, :categories)
+  end
 end
