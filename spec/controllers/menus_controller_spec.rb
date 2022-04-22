@@ -52,7 +52,7 @@ RSpec.describe MenusController do
     end
 
     it '[controller.menu.5] is invalid if the given menu data is incorrect' do
-    invalid_attributes = FactoryBot.attributes_for(:menu, name: nil)
+      invalid_attributes = FactoryBot.attributes_for(:menu, name: nil)
 
       post :create, params: invalid_attributes
 
@@ -62,18 +62,33 @@ RSpec.describe MenusController do
       expect(parsed_body["message"]).to include("Error while creating a menu")
       expect(parsed_body["payload"]).to eq(nil)
     end
+
+    it "[controller.menu.6] is invalid if the menus' name already exists" do
+      menu1 = FactoryBot.create(:menu, name: "Es Teh")
+      menu2 = FactoryBot.attributes_for(:menu, name: "Es Teh")
+
+      post :create, params: menu2
+
+      parsed_body = JSON.parse(response.body)
+
+      expect(response).to have_http_status(:conflict)
+      expect(parsed_body["message"]).to include("Menu with that name already exists")
+    end
   end
 
   describe 'PATCH /menus/:id' do
-    it '[controller.menu.6] it should return the menu with updated field(s)' do
+    it '[controller.menu.7] it should return the menu with updated field(s)' do
     end
 
-    it '[controller.menu.7] is invalid if the given updated field(s) are incorect' do
+    it '[controller.menu.8] is invalid if the given updated field(s) are incorect' do
+    end
+
+    it "[controller.menu.9] is invalid if the menus' name already exists" do
     end
   end
 
   describe 'DELETE /menus/:id' do
-    it '[controller.menu.8] it should succeed delete the menu' do
+    it '[controller.menu.10] it should succeed delete the menu' do
       deleted_menu = FactoryBot.create(:menu)
       
       delete :destroy, params: { id: deleted_menu }
@@ -84,7 +99,7 @@ RSpec.describe MenusController do
       expect(parsed_body["message"]).to include("Successfully delete a menu")
     end
   
-    it '[controller.menu.9] is invalid if menu with the given id is not exists' do
+    it '[controller.menu.11] is invalid if menu with the given id is not exists' do
       deleted_menu = 0
 
       delete :destroy, params: { id: deleted_menu }
