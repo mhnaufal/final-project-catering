@@ -24,6 +24,12 @@ class MenusController < ApplicationController
       render json: send_failed("Error while creating a menu"), status: :bad_request
     end
   end
+
+  def destroy
+    Menu.delete(params[:id])
+
+    return render json: send_success("Successfully delete a menu", nil)
+  end
   
   private
   def menu_params
