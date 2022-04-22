@@ -33,14 +33,13 @@ RSpec.describe MenusController do
 
       parsed_body = JSON.parse(response.body)
 
-      expect(parsed_body).to include({ "message" => "No Menu with the id = #{menu_id}" })
+      expect(parsed_body["message"]).to include("No Menu with the id = #{menu_id}")
       expect(response).to have_http_status(:not_found)
     end
   end
 
   describe 'POST /menus' do
     it '[controller.menu.4] it should save the menu to the database' do
-      category_id = Category.first()
       valid_attributes = FactoryBot.attributes_for(:menu, name: 'Es Teh', description: "An English tea with blocks of North Poles' ice shard", price:  1999.0)
 
       post :create, params: valid_attributes
@@ -48,6 +47,8 @@ RSpec.describe MenusController do
       parsed_body = JSON.parse(response.body)
 
       expect(response).to be_successful
+      expect(parsed_body["message"]).to include("Successfully create a Menu")
+      expect(parsed_body["payload"]).to_not eq(nil)
     end
   end
 end
