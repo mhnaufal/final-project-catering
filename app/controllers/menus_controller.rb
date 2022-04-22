@@ -15,6 +15,12 @@ class MenusController < ApplicationController
   end
 
   def create
+    found_menu = Menu.find_by(name: params[:name])
+
+    if not found_menu.nil?
+      return render json: send_failed("Menu with that name already exists"), status: :conflict
+    end
+
     menu = Menu.new(menu_params)
 
     if menu.valid?
