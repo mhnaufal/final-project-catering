@@ -26,9 +26,13 @@ class MenusController < ApplicationController
   end
 
   def destroy
-    Menu.delete(params[:id])
+    @menu = Menu.find_by_id(params[:id])
 
-    return render json: send_success("Successfully delete a menu", nil)
+    if @menu.nil?
+      return render json: send_failed("Error while deleting a menu. Menu not found", nil), status: :not_found
+    else
+      return render json: send_success("Successfully delete a menu", nil)
+    end
   end
   
   private
