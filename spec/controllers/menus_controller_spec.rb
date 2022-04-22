@@ -63,4 +63,25 @@ RSpec.describe MenusController do
       expect(parsed_body["payload"]).to eq(nil)
     end
   end
+
+  describe 'PATCH /menus/:id' do
+    it '[controller.menu.6] it should return the menu with updated field(s)' do
+    end
+
+    it '[controller.menu.7] is invalid if the given updated field(s) are incorect' do
+    end
+  end
+
+  describe 'DELETE /menus/:id' do
+    it '[controller.menu.8] it should succeed delete the menu' do
+      deleted_menu = FactoryBot.create(:menu)
+      
+      delete :destroy, params: { id: deleted_menu }
+
+      parsed_body = JSON.parse(response.body)
+
+      expect(response).to be_successful
+      expect(parsed_body["message"]).to include("Successfully delete a menu")
+    end
+  end
 end
