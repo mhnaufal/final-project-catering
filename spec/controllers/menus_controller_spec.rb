@@ -37,4 +37,17 @@ RSpec.describe MenusController do
       expect(response).to have_http_status(:not_found)
     end
   end
+
+  describe 'POST /menus' do
+    it '[controller.menu.4] it should save the menu to the database' do
+      category_id = Category.first()
+      valid_attributes = FactoryBot.attributes_for(:menu, name: 'Es Teh', description: "An English tea with blocks of North Poles' ice shard", price:  1999.0)
+
+      post :create, params: valid_attributes
+
+      parsed_body = JSON.parse(response.body)
+
+      expect(response).to be_successful
+    end
+  end
 end
