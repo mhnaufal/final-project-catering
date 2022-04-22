@@ -16,8 +16,13 @@ class MenusController < ApplicationController
 
   def create
     menu = Menu.new(menu_params)
-    menu.save
-    return render json: send_success("Successfully create a Menu", menu)
+
+    if menu.valid?
+      menu.save
+      return render json: send_success("Successfully create a Menu", menu)
+    else
+      render json: send_failed("Error while creating a menu"), status: :bad_request
+    end
   end
   
   private
