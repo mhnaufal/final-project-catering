@@ -83,5 +83,17 @@ RSpec.describe MenusController do
       expect(response).to be_successful
       expect(parsed_body["message"]).to include("Successfully delete a menu")
     end
+  
+    it '[controller.menu.9] is invalid if menu with the given id is not exists' do
+      deleted_menu = 0
+
+      delete :destroy, params: { id: deleted_menu }
+
+      parsed_body = JSON.parse(response.body)
+
+      expect(response).to have_http_status(:not_found)
+      expect(parsed_body["message"]).to include("Error while deleting a menu. Menu not found")
+      expect(parsed_body["payload"]).to eq(nil)
+    end
   end
 end
