@@ -50,5 +50,17 @@ RSpec.describe MenusController do
       expect(parsed_body["message"]).to include("Successfully create a Menu")
       expect(parsed_body["payload"]).to_not eq(nil)
     end
+
+    it '[controller.menu.5] is invalid if the given menu data is incorrect' do
+    invalid_attributes = FactoryBot.attributes_for(:menu, name: nil)
+
+      post :create, params: invalid_attributes
+
+      parsed_body = JSON.parse(response.body)
+
+      expect(response).to have_http_status(:bad_request)
+      expect(parsed_body["message"]).to include("Error while creating a menu")
+      expect(parsed_body["payload"]).to eq(nil)
+    end
   end
 end
