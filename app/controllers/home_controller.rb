@@ -3,7 +3,7 @@ class HomeController < ActionController::Base
     render json: {
       status: 'SUCCESS',
       url: request.host || '0.0.0.0',
-      message: 'Welcome to GIGIH Family Catering',
+      message: 'Welcome to GIGIH Family Catering🦐 ',
       payload: nil
     }
   end

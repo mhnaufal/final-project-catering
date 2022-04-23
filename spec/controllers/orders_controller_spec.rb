@@ -32,7 +32,7 @@ RSpec.describe OrdersController do
 
         parsed_body = JSON.parse(response.body)
 
-        expect(parsed_body).to include({ "message" => "No order with the id = #{order_id}" })
+        expect(parsed_body).to include({ "message" => "❌ No order with the id = #{order_id}" })
         expect(response).to have_http_status(:not_found)
       end
     end

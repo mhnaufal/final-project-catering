@@ -8,9 +8,9 @@ class OrdersController < ApplicationController
     @order = Order.find_by_id(params[:id])
 
     if @order.nil?
-      render json: send_failed("No order with the id = #{params[:id]}", nil), status: :not_found
+      render json: send_failed("❌ No order with the id = #{params[:id]}", nil), status: :not_found
     else
-      render json: send_success("Found order with id = #{params[:id]}", @order)
+      render json: send_success("✅ Found order with id = #{params[:id]}", @order)
     end
   end
 end

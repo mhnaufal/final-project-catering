@@ -33,7 +33,7 @@ RSpec.describe MenusController do
 
       parsed_body = JSON.parse(response.body)
 
-      expect(parsed_body["message"]).to include("No Menu with the id = #{menu_id}")
+      expect(parsed_body["message"]).to include("❌ No Menu with the id = #{menu_id}")
       expect(response).to have_http_status(:not_found)
     end
   end
@@ -47,7 +47,7 @@ RSpec.describe MenusController do
       parsed_body = JSON.parse(response.body)
 
       expect(response).to be_successful
-      expect(parsed_body["message"]).to include("Successfully create a Menu")
+      expect(parsed_body["message"]).to include("✅ Successfully create a Menu")
       expect(parsed_body["payload"]).to_not eq(nil)
     end
 
@@ -59,7 +59,7 @@ RSpec.describe MenusController do
       parsed_body = JSON.parse(response.body)
 
       expect(response).to have_http_status(:bad_request)
-      expect(parsed_body["message"]).to include("Error while creating a menu")
+      expect(parsed_body["message"]).to include("❌ Error while creating a menu")
       expect(parsed_body["payload"]).to eq(nil)
     end
 
@@ -72,7 +72,7 @@ RSpec.describe MenusController do
       parsed_body = JSON.parse(response.body)
 
       expect(response).to have_http_status(:conflict)
-      expect(parsed_body["message"]).to include("Menu with that name already exists")
+      expect(parsed_body["message"]).to include("❌ Menu with that name already exists")
     end
   end
 
@@ -96,7 +96,7 @@ RSpec.describe MenusController do
       parsed_body = JSON.parse(response.body)
 
       expect(response).to be_successful
-      expect(parsed_body["message"]).to include("Successfully delete a menu")
+      expect(parsed_body["message"]).to include("✅ Successfully delete a menu")
     end
   
     it '[controller.menu.11] is invalid if menu with the given id is not exists' do
@@ -107,7 +107,7 @@ RSpec.describe MenusController do
       parsed_body = JSON.parse(response.body)
 
       expect(response).to have_http_status(:not_found)
-      expect(parsed_body["message"]).to include("Error while deleting a menu. Menu not found")
+      expect(parsed_body["message"]).to include("❌ Error while deleting a menu. Menu not found")
       expect(parsed_body["payload"]).to eq(nil)
     end
   end
