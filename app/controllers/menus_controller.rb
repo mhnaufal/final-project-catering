@@ -31,6 +31,23 @@ class MenusController < ApplicationController
     end
   end
 
+  def update
+    found_menu = Menu.find_by_id(params[:id])
+
+    if found_menu.nil?
+      return render json: send_failed("❌ Menu with that name already exists"), status: :conflict
+    end
+
+    found_menu.assign_attributes(menu_params)
+
+    if found_menu.valid?
+      found_menu.save
+      return render json: send_success("✅ Successfully update a Menu", found_menu)
+    else
+      render json: send_failed("❌ Error while updating a menu"), status: :bad_request
+    end
+  end
+
   def destroy
     @menu = Menu.find_by_id(params[:id])
 
