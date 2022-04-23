@@ -12,7 +12,7 @@ RSpec.describe OrdersController do
       parsed_body = JSON.parse(response.body)
 
       expect(response).to be_successful
-      expect(parsed_body.size).to eq(3)
+      expect(parsed_body["payload"].size).to eq(3)
     end
   end
 

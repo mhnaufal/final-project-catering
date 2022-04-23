@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   def index
     @orders = Order.all
-    render json: @orders
+    render json: send_success("✅ All orders", @orders)
   end
 
   def show
