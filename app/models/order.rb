@@ -1,5 +1,5 @@
 class Order < ApplicationRecord
-    enum :status, { NEW: 0, PAID: 1, CANCELLED: 2 }
+    enum status: { NEW: 0, PAID: 1, CANCELLED: 2 }
 
     validates :email, presence: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, message: "wrong email format!" }
     validates :status, presence: true , inclusion: { in: statuses }
