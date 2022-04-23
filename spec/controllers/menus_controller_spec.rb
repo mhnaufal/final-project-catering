@@ -78,12 +78,39 @@ RSpec.describe MenusController do
 
   describe 'PATCH /menus/:id' do
     it '[controller.menu.7] it should return the menu with updated field(s)' do
+      menu = FactoryBot.create(:menu)
+
+      patch :update, params: { id: menu, name: 'Kopi Jos' }
+
+      parsed_body = JSON.parse(response.body)
+
+      expect(response).to be_successful
+      expect(parsed_body["message"]).to include("✅ Successfully update a Menu")
+      expect(parsed_body["payload"]).to_not eq(nil)
     end
 
     it '[controller.menu.8] is invalid if the given updated field(s) are incorect' do
+      menu = FactoryBot.create(:menu)
+
+      post :update, params: { id: menu, name: nil }
+
+      parsed_body = JSON.parse(response.body)
+
+      expect(response).to have_http_status(:bad_request)
+      expect(parsed_body["message"]).to include("❌ Error while updating a menu")
+      expect(parsed_body["payload"]).to eq(nil)
     end
 
     it "[controller.menu.9] is invalid if the menus' name already exists" do
+      menu1 = FactoryBot.create(:menu, name: "Es Teh")
+      menu2 = FactoryBot.attributes_for(:menu, name: "Es Teh Panas")
+
+      post :update, params: { id: menu2, name: "Es Teh" }
+
+      parsed_body = JSON.parse(response.body)
+
+      expect(response).to have_http_status(:conflict)
+      expect(parsed_body["message"]).to include("❌ Menu with that name already exists")
     end
   end
 
