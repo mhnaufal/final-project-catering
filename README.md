@@ -49,7 +49,7 @@ bundle exec rspec -fd
 #### Local
 
 1. Clone
-   sorry but I don't know how to clone directly from Relpit
+   sorry but I don't know how to clone directly from Replit
 2. Install the packages
 
 ```shell
